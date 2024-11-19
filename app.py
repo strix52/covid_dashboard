@@ -115,6 +115,6 @@ st.markdown("""
     }
     </style>
     <div class="footer">
-        <p>This dashboard was made as an assignment project by Ayush, with helpers Aryan and Chander </p>
+        <p>This dashboard was made as an assignment project by Ayush , Aryan and Chanderprakash </p>
     </div>
     """, unsafe_allow_html=True)
