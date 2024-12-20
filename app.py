@@ -114,7 +114,5 @@ st.markdown("""
         padding: 10px;
     }
     </style>
-    <div class="footer">
-        <p>This dashboard was made as an assignment project by Ayush , Aryan and Chanderprakash </p>
-    </div>
+ 
     """, unsafe_allow_html=True)
