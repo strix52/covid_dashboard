@@ -9,7 +9,8 @@ st.write("A simple dashboard to visualize global COVID-19 cases.")
 # Load Data
 @st.cache_data
 def load_data():
-    url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
+    # Use GitHub raw URL for better reliability
+    url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
     data = pd.read_csv(url)
     data = data[["date", "location", "total_cases", "new_cases", "total_deaths", "new_deaths", "total_vaccinations", "people_vaccinated", "people_fully_vaccinated"]]
     data['date'] = pd.to_datetime(data['date'])
@@ -35,17 +36,23 @@ filtered_data = filtered_data.fillna(0)
 
 # Summary Statistics
 st.sidebar.subheader("Summary Statistics")
-total_cases = filtered_data["total_cases"].sum()
-total_deaths = filtered_data["total_deaths"].sum()
-total_vaccinations = filtered_data["total_vaccinations"].sum()
-people_vaccinated = filtered_data["people_vaccinated"].sum()
-people_fully_vaccinated = filtered_data["people_fully_vaccinated"].sum()
 
-st.sidebar.write(f"Total Cases: {total_cases}")
-st.sidebar.write(f"Total Deaths: {total_deaths}")
-st.sidebar.write(f"Total Vaccinations: {total_vaccinations}")
-st.sidebar.write(f"People Vaccinated: {people_vaccinated}")
-st.sidebar.write(f"People Fully Vaccinated: {people_fully_vaccinated}")
+# Calculate latest cumulative values for the selected period
+if not filtered_data.empty:
+    # Use max() to get the highest cumulative value, avoiding issues where the last day might be 0/NaN
+    total_cases = int(filtered_data.groupby("location")["total_cases"].max().sum())
+    total_deaths = int(filtered_data.groupby("location")["total_deaths"].max().sum())
+    total_vaccinations = int(filtered_data.groupby("location")["total_vaccinations"].max().sum())
+    people_vaccinated = int(filtered_data.groupby("location")["people_vaccinated"].max().sum())
+    people_fully_vaccinated = int(filtered_data.groupby("location")["people_fully_vaccinated"].max().sum())
+else:
+    total_cases = total_deaths = total_vaccinations = people_vaccinated = people_fully_vaccinated = 0
+
+st.sidebar.metric("Total Cases", f"{total_cases:,}")
+st.sidebar.metric("Total Deaths", f"{total_deaths:,}")
+st.sidebar.metric("Total Vaccinations", f"{total_vaccinations:,}")
+st.sidebar.metric("People Vaccinated", f"{people_vaccinated:,}")
+st.sidebar.metric("Fully Vaccinated", f"{people_fully_vaccinated:,}")
 
 # Plot Total Cases
 st.subheader("Total Cases Over Time")
