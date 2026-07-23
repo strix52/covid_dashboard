@@ -64,14 +64,12 @@ To set up the project locally, follow these steps:
 
 ## Dependencies
 
-The project declares only the three packages imported directly by `app.py` in
-`requirements.txt`. Their transitive dependencies are resolved by pip from the
-current secure constraints published by those packages, rather than freezing a
-stale 2024 environment into the application manifest.
+`requirements.txt` pins the direct packages imported by `app.py` and their
+resolved runtime dependencies. This keeps installs reproducible and gives
+GitHub an exact dependency graph to check instead of a stale 2024 environment.
 
-- Streamlit 1.60.0
-- pandas 3.0.5
-- Plotly 6.9.0
+The direct packages are Streamlit 1.60.0, pandas 3.0.5, and Plotly 6.9.0.
+Dependabot updates the lock weekly.
 
 Python 3.13 is used by the dependency-audit workflow.
 
