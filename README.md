@@ -64,50 +64,16 @@ To set up the project locally, follow these steps:
 
 ## Dependencies
 
-The project requires the following Python packages, specified in `requirements.txt`:
-- altair==5.4.1
-- attrs==24.2.0
-- blinker==1.9.0
-- cachetools==5.5.0
-- certifi==2024.8.30
-- charset-normalizer==3.4.0
-- click==8.1.7
-- colorama==0.4.6
-- gitdb==4.0.11
-- GitPython==3.1.43
-- idna==3.10
-- Jinja2==3.1.4
-- jsonschema==4.23.0
-- jsonschema-specifications==2024.10.1
-- markdown-it-py==3.0.0
-- MarkupSafe==3.0.2
-- mdurl==0.1.2
-- narwhals==1.13.5
-- numpy==2.1.3
-- packaging==24.2
-- pandas==2.2.3
-- pillow==11.0.0
-- plotly==5.24.1
-- protobuf==5.28.3
-- pyarrow==18.0.0
-- pydeck==0.9.1
-- Pygments==2.18.0
-- python-dateutil==2.9.0.post0
-- pytz==2024.2
-- referencing==0.35.1
-- requests==2.32.3
-- rich==13.9.4
-- rpds-py==0.21.0
-- six==1.16.0
-- smmap==5.0.1
-- streamlit==1.40.1
-- tenacity==9.0.0
-- toml==0.10.2
-- tornado==6.4.1
-- typing_extensions==4.12.2
-- tzdata==2024.2
-- urllib3==2.2.3
-- watchdog==6.0.0
+The project declares only the three packages imported directly by `app.py` in
+`requirements.txt`. Their transitive dependencies are resolved by pip from the
+current secure constraints published by those packages, rather than freezing a
+stale 2024 environment into the application manifest.
+
+- Streamlit 1.60.0
+- pandas 3.0.5
+- Plotly 6.9.0
+
+Python 3.13 is used by the dependency-audit workflow.
 
 ## Data Source
 

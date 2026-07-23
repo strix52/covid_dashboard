@@ -1,2 +1,10 @@
 /import numpy as np.py
 /import tkinter as tk.py
+
+# Python and local environment artifacts
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.streamlit/secrets.toml
