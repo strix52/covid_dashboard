@@ -1,5 +1,5 @@
-const CACHE_NAME = "covid-archive-v6";
-const CORE_ASSETS = ["./", "index.html", "styles.css?v=archive-20260724d", "app.js?v=archive-20260724d", "data/archive-data.json", "data/map-archive-data.json", "data/world-map.json", "manifest.webmanifest", "assets/archive-mark.svg"];
+const CACHE_NAME = "covid-archive-v7";
+const CORE_ASSETS = ["./", "index.html", "styles.css?v=archive-20260724e", "app.js?v=archive-20260724e", "data/archive-data.json", "data/map-archive-data.json", "data/world-map.json", "manifest.webmanifest", "assets/archive-mark.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)));

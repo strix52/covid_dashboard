@@ -9,7 +9,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="assets/archive-mark.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://catalog.ourworldindata.org" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=archive-20260724d">
+    <link rel="stylesheet" href="styles.css?v=archive-20260724e">
     <title>COVID-19 Dashboard</title>
   </head>
   <body>
@@ -25,24 +25,33 @@
 
     <main id="main-content">
       <section class="hero shell" id="top" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <p class="eyebrow">COVID-19 archive · 2020–2024</p>
-          <h1 id="page-title">COVID-19 Dashboard</h1>
-          <p class="lede">A static record of reported cases, deaths, and vaccination. The data stops in December 2024.</p>
-          <div class="hero-actions">
-            <a class="primary-action" href="#map">Play the record</a>
-            <a class="secondary-action" href="#explore">View country data</a>
+        <div class="hero-stage">
+          <div class="hero-copy">
+            <p class="eyebrow">COVID-19 archive · 2020–2024</p>
+            <h1 id="page-title">COVID-19 Dashboard</h1>
+            <p class="lede">A static record of reported cases, deaths, and vaccination. The data stops in December 2024.</p>
+            <div class="hero-actions">
+              <a class="primary-action" href="#map">Play the record</a>
+              <a class="secondary-action" href="#explore">View country data</a>
+            </div>
           </div>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="orb orb-one"></div>
-          <div class="orb orb-two"></div>
-          <div class="orb orb-three"></div>
-          <div class="hero-card">
-            <span class="hero-card-label">Archive window</span>
-            <strong id="archive-range">2020 to 2024</strong>
-            <span class="hero-card-rule"></span>
-            <span class="hero-card-caption">A local monthly snapshot</span>
+          <div class="hero-art" aria-hidden="true">
+            <div class="hero-visual-topline"><span>World record</span><span>60 months</span></div>
+            <svg class="hero-visual" viewBox="0 0 360 220" fill="none" aria-hidden="true">
+              <path class="hero-visual-grid" d="M20 181H340M20 133H340M20 85H340M20 37H340"></path>
+              <path class="hero-visual-area" d="M20 181C48 180 55 176 73 165C91 154 102 116 124 106C147 95 153 73 176 70C201 67 206 91 229 86C250 82 261 57 283 51C301 46 315 55 340 44V181H20Z"></path>
+              <path class="hero-visual-line" d="M20 181C48 180 55 176 73 165C91 154 102 116 124 106C147 95 153 73 176 70C201 67 206 91 229 86C250 82 261 57 283 51C301 46 315 55 340 44"></path>
+              <circle class="hero-visual-dot" cx="73" cy="165" r="5"></circle>
+              <circle class="hero-visual-dot" cx="176" cy="70" r="5"></circle>
+              <circle class="hero-visual-dot" cx="283" cy="51" r="5"></circle>
+            </svg>
+            <div class="hero-years"><span>2020</span><span>2021</span><span>2022</span><span>2023</span><span>2024</span></div>
+            <div class="hero-card">
+              <span class="hero-card-label">Archive window</span>
+              <strong id="archive-range">2020 to 2024</strong>
+              <span class="hero-card-rule"></span>
+              <span class="hero-card-caption">A local monthly snapshot</span>
+            </div>
           </div>
         </div>
       </section>
@@ -108,15 +117,16 @@
       </section>
 
       <section class="explorer shell" id="explore" aria-labelledby="explorer-title">
-        <div class="explorer-heading">
-          <div>
-            <p class="eyebrow">Country data</p>
-            <h2 id="explorer-title">Compare one place at a time</h2>
+        <div class="explorer-frame">
+          <div class="explorer-heading">
+            <div>
+              <p class="eyebrow">Country data</p>
+              <h2 id="explorer-title">Compare one place at a time</h2>
+            </div>
+            <p class="explorer-intro">Choose a place and a measure. The lines use monthly snapshots of cumulative reported totals.</p>
           </div>
-          <p class="explorer-intro">Choose a place and a measure. The lines use monthly snapshots of cumulative reported totals.</p>
-        </div>
 
-        <div class="explorer-panel">
+          <div class="explorer-panel">
           <div class="explorer-controls">
             <div class="field-group">
               <label for="location-select">Place</label>
@@ -150,7 +160,8 @@
               <p class="insight-note" id="insight-note">Loading the selected record…</p>
             </aside>
           </div>
-          <p class="status-line" id="chart-status" role="status" aria-live="polite">Loading archive data…</p>
+            <p class="status-line" id="chart-status" role="status" aria-live="polite">Loading archive data…</p>
+          </div>
         </div>
       </section>
 
@@ -202,6 +213,6 @@
       <span id="footer-range">Local data snapshot</span>
     </footer>
 
-    <script type="module" src="app.js?v=archive-20260724d"></script>
+    <script type="module" src="app.js?v=archive-20260724e"></script>
   </body>
 </html>
