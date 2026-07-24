@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#f4f7fb">
-    <meta name="description" content="An archival visual record of COVID-19 reporting from 2020 through 2024.">
+    <meta name="theme-color" content="#f5f5f7">
+    <meta name="description" content="A static record of reported COVID-19 cases, deaths, and vaccination from 2020 to 2024.">
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="assets/archive-mark.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://catalog.ourworldindata.org" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=archive-20260724b">
+    <link rel="stylesheet" href="styles.css?v=archive-20260724d">
     <title>COVID-19 Dashboard</title>
   </head>
   <body>
@@ -20,18 +20,18 @@
         <span class="wordmark-mark" aria-hidden="true"><span></span><span></span><span></span></span>
         <span>COVID-19 Dashboard</span>
       </a>
-      <a class="quiet-link" href="#sources">Data &amp; notes <span aria-hidden="true">↘</span></a>
+      <a class="quiet-link" href="#sources">Sources</a>
     </header>
 
     <main id="main-content">
       <section class="hero shell" id="top" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="eyebrow">An archival record · 2020–2024</p>
-          <h1 id="page-title">A record of a world changed.</h1>
-          <p class="lede">This is no longer a live counter. It is a calm, navigable record of the reported COVID-19 pandemic—its scale, its uneven course, and the data trail it left behind.</p>
+          <p class="eyebrow">COVID-19 archive · 2020–2024</p>
+          <h1 id="page-title">COVID-19 Dashboard</h1>
+          <p class="lede">A static record of reported cases, deaths, and vaccination. The data stops in December 2024.</p>
           <div class="hero-actions">
-            <a class="primary-action" href="#explore">Explore the archive <span aria-hidden="true">↓</span></a>
-            <a class="secondary-action" href="#sources">How to read this record</a>
+            <a class="primary-action" href="#map">Play the record</a>
+            <a class="secondary-action" href="#explore">View country data</a>
           </div>
         </div>
         <div class="hero-art" aria-hidden="true">
@@ -40,33 +40,69 @@
           <div class="orb orb-three"></div>
           <div class="hero-card">
             <span class="hero-card-label">Archive window</span>
-            <strong id="archive-range">2020 — 2024</strong>
+            <strong id="archive-range">2020 to 2024</strong>
             <span class="hero-card-rule"></span>
-            <span class="hero-card-caption">Monthly observations, held locally</span>
+            <span class="hero-card-caption">A local monthly snapshot</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="map-section shell" id="map" aria-labelledby="map-title">
+        <div class="section-heading section-heading-wide">
+          <div>
+            <p class="eyebrow">World map</p>
+            <h2 id="map-title">Watch the record move</h2>
+          </div>
+          <p>Press play to step through the monthly archive. The story view moves from reported spread to vaccination, then back to later waves.</p>
+        </div>
+
+        <div class="map-card">
+          <div class="map-toolbar">
+            <div class="map-playback">
+              <button type="button" class="map-play" id="map-play" aria-pressed="false">Play timeline</button>
+              <output class="map-date" id="map-date" aria-live="polite">Loading map…</output>
+            </div>
+            <label class="map-view-label" for="map-view">Show
+              <select id="map-view" name="map-view">
+                <option value="story">Story</option>
+                <option value="cases">Reported spread</option>
+                <option value="vaccinations">Vaccination</option>
+              </select>
+            </label>
+          </div>
+          <figure class="world-map-figure" aria-labelledby="map-caption">
+            <svg id="world-map" viewBox="0 0 1000 510" role="img" aria-label="World map loading"></svg>
+            <figcaption id="map-caption">Countries are shaded when the archive has a reported value for that month.</figcaption>
+          </figure>
+          <div class="map-footer">
+            <label class="timeline-label" for="map-timeline">Month
+              <input id="map-timeline" type="range" min="0" max="59" value="0" step="1">
+            </label>
+            <p class="map-note" id="map-note" role="status">Loading the map archive…</p>
           </div>
         </div>
       </section>
 
       <section class="summary shell" aria-labelledby="global-summary-title">
         <div class="section-heading">
-          <p class="eyebrow">The global picture</p>
-          <h2 id="global-summary-title">What the record holds</h2>
+          <p class="eyebrow">Global totals</p>
+          <h2 id="global-summary-title">By the end of the archive</h2>
         </div>
         <div class="summary-grid" id="global-summary" aria-busy="true">
           <article class="metric-card metric-card-featured">
             <p>Reported cases</p>
             <strong>Loading…</strong>
-            <span>Worldwide through the archive end</span>
+            <span>Reported worldwide</span>
           </article>
           <article class="metric-card">
             <p>Recorded deaths</p>
             <strong>Loading…</strong>
-            <span>Worldwide through the archive end</span>
+            <span>Reported worldwide</span>
           </article>
           <article class="metric-card">
             <p>Vaccine doses</p>
             <strong>Loading…</strong>
-            <span>Last reported global total</span>
+            <span>Last reported total</span>
           </article>
         </div>
       </section>
@@ -74,10 +110,10 @@
       <section class="explorer shell" id="explore" aria-labelledby="explorer-title">
         <div class="explorer-heading">
           <div>
-            <p class="eyebrow">Archive explorer</p>
-            <h2 id="explorer-title">Follow the reported curve</h2>
+            <p class="eyebrow">Country data</p>
+            <h2 id="explorer-title">Compare one place at a time</h2>
           </div>
-          <p class="explorer-intro">Select a place, then change the lens. Values are cumulative reported totals, sampled at the end of each month.</p>
+          <p class="explorer-intro">Choose a place and a measure. The lines use monthly snapshots of cumulative reported totals.</p>
         </div>
 
         <div class="explorer-panel">
@@ -101,7 +137,7 @@
                   <p class="chart-kicker" id="chart-kicker">Worldwide</p>
                   <h3 id="chart-title">Reported cases over time</h3>
                 </div>
-                <p class="chart-value" id="chart-value">—</p>
+                <p class="chart-value" id="chart-value">Loading</p>
               </div>
               <svg id="trend-chart" viewBox="0 0 1000 420" role="img" aria-label="Line chart loading"></svg>
               <figcaption id="chart-description">Monthly cumulative reported totals from the local archive snapshot.</figcaption>
@@ -121,10 +157,10 @@
       <section class="chapters shell" aria-labelledby="chapters-title">
         <div class="section-heading section-heading-wide">
           <div>
-            <p class="eyebrow">Five years, in context</p>
-            <h2 id="chapters-title">The curve became a history.</h2>
+            <p class="eyebrow">Archive notes</p>
+            <h2 id="chapters-title">Five years in five stops</h2>
           </div>
-          <p>Use the years as waypoints. These notes are not a complete account of the pandemic; they are invitations to see how the reported global totals accumulated.</p>
+          <p>These notes give the chart some context. They do not tell the whole story of the pandemic.</p>
         </div>
 
         <div class="chapter-layout">
@@ -138,10 +174,10 @@
           <article class="chapter-card" id="year-panel" role="tabpanel" tabindex="0" aria-live="polite">
             <p class="chapter-number" id="chapter-number">01 / 05</p>
             <h3 id="chapter-title">The first year</h3>
-            <p id="chapter-copy">A novel outbreak became a global emergency. The lines began their long climb, and the archive began to take shape.</p>
+            <p id="chapter-copy">A new outbreak became a global emergency. Reported totals began to climb.</p>
             <div class="chapter-stat-row">
-              <div><span>Cases by year end</span><strong id="chapter-cases">—</strong></div>
-              <div><span>Deaths by year end</span><strong id="chapter-deaths">—</strong></div>
+              <div><span>Cases by year end</span><strong id="chapter-cases">Loading</strong></div>
+              <div><span>Deaths by year end</span><strong id="chapter-deaths">Loading</strong></div>
             </div>
           </article>
         </div>
@@ -150,22 +186,22 @@
       <section class="sources shell" id="sources" aria-labelledby="sources-title">
         <div class="source-card">
           <div>
-            <p class="eyebrow">Read the record responsibly</p>
-            <h2 id="sources-title">Numbers are evidence, not the whole story.</h2>
+            <p class="eyebrow">Sources and limits</p>
+            <h2 id="sources-title">Read the figures with care</h2>
           </div>
           <div class="source-copy">
-            <p>Reported cases and deaths depend on testing, definitions, access, and later revisions. This interface preserves a small, local archive snapshot for exploration; it does not make claims about the total human impact.</p>
-            <p>Source: <a id="source-link" href="https://ourworldindata.org/coronavirus" target="_blank" rel="noreferrer">Our World in Data’s COVID-19 dataset</a>, including data sourced from the World Health Organization and other official providers. Licensed under CC BY 4.0; see the source for methodology and citations.</p>
+            <p>Reported cases and deaths depend on testing, definitions, access, and later revisions. This site keeps a local snapshot for browsing. It cannot measure the full human cost.</p>
+            <p>Data: <a id="source-link" href="https://ourworldindata.org/coronavirus" target="_blank" rel="noreferrer">Our World in Data COVID-19 dataset</a>. The country outlines come from Natural Earth. Both sources and their terms are linked in the README.</p>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer shell">
-      <span>COVID-19 Dashboard · archival edition</span>
+      <span>COVID-19 Dashboard · archive</span>
       <span id="footer-range">Local data snapshot</span>
     </footer>
 
-    <script type="module" src="app.js?v=archive-20260724b"></script>
+    <script type="module" src="app.js?v=archive-20260724d"></script>
   </body>
 </html>

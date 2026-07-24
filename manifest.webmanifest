@@ -3,8 +3,8 @@
   "short_name": "COVID Archive",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f4f7fb",
-  "theme_color": "#f4f7fb",
+  "background_color": "#f5f5f7",
+  "theme_color": "#f5f5f7",
   "icons": [
     { "src": "assets/archive-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
