@@ -1,28 +1,28 @@
 # COVID-19 Dashboard
 
-An archival, static visual record of reported COVID-19 data from 2020 through 2024.
+An archival website for reported COVID-19 data from 2020 through 2024.
 
 ![COVID-19 Dashboard archival interface](assets/archive-mark.svg)
 
-## Why this version exists
+## What this is
 
-The original Streamlit showcase has been retired. This rebuild is a dependency-free web application: no Python runtime, no package lockfile, no server process, and no live counter pretending the pandemic is current news.
+The original Streamlit showcase is gone. This version is a static website with no runtime packages, server process, or live counter.
 
-It keeps the title and the original intent—making COVID-19 data understandable—but reframes the project as an archive. The interface is designed around clarity, restraint, accessibility, and quiet exploration.
+It keeps the original purpose: make COVID-19 data easier to inspect. The site is now an archive, with a clear end date and local data files.
 
 ## What it includes
 
-- A local monthly snapshot for the world plus India, the United States, Brazil, the United Kingdom, Germany, Japan, South Africa, and Australia.
-- A three-lens explorer for cumulative reported cases, recorded deaths, and vaccine doses.
-- Year-by-year contextual waypoints from 2020 to 2024.
-- Light/dark system theming, reduced-motion support, high-contrast support, visible keyboard focus, semantic landmarks, a skip link, and 44px controls.
-- A small service worker that caches the archive shell for offline revisiting.
+- A local monthly snapshot for the world and nine country views.
+- Country charts for reported cases, recorded deaths, and vaccine doses.
+- A 60-month world map. Press play to watch the archive move through early spread, vaccination, and later waves.
+- Light and dark themes, keyboard support, high-contrast support, and reduced motion support.
+- An offline cache for the static site.
 
 ## Data and limitations
 
-The included snapshot is generated from the [Our World in Data COVID-19 dataset](https://ourworldindata.org/coronavirus), which brings together official reporting including World Health Organization data. It is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The figures come from the [Our World in Data COVID-19 dataset](https://ourworldindata.org/coronavirus), which brings together official reporting including World Health Organization data. The map uses [Natural Earth](https://www.naturalearthdata.com/downloads/) country outlines. Natural Earth data is public domain; the COVID data is available under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-The archive intentionally stops at December 2024. Reported cases and deaths depend on changing testing, reporting, and revision practices; they are not a complete measure of the pandemic’s impact.
+The archive stops at December 2024. Reported cases and deaths depend on testing, reporting, and later revisions. They are not a complete measure of the pandemic’s impact.
 
 To refresh the local snapshot, run:
 
@@ -30,7 +30,15 @@ To refresh the local snapshot, run:
 node scripts/build-archive-data.mjs
 ```
 
-The generator downloads OWID’s documented compact COVID dataset and retains monthly observations only for the locations in `scripts/build-archive-data.mjs`.
+The country-chart generator retains monthly observations for the locations in `scripts/build-archive-data.mjs`.
+
+To rebuild the world map archive, run:
+
+```sh
+node scripts/build-map-archive.mjs
+```
+
+This generator writes a local 60-month timeline and vector country outlines to `data/`.
 
 ## Run locally
 
@@ -47,7 +55,10 @@ Then open `http://localhost:4173`.
 ```text
 .
 ├── data/archive-data.json       # Local 2020–2024 archive snapshot
+├── data/map-archive-data.json   # Monthly country-level map timeline
+├── data/world-map.json          # Natural Earth country geometry
 ├── scripts/build-archive-data.mjs
+├── scripts/build-map-archive.mjs
 ├── index.html                   # Semantic application shell
 ├── app.js                       # Rendering and interaction logic
 ├── styles.css                   # Responsive, themed design system
@@ -55,9 +66,9 @@ Then open `http://localhost:4173`.
 └── sw.js                         # Offline shell cache
 ```
 
-## Design approach
+## Design
 
-The interface is an original web design guided by Apple Human Interface Guidelines principles and modern web accessibility guidance: system typography, a single interaction accent, layered surfaces, direct controls, generous touch targets, and respect for user motion, contrast, and color-scheme preferences. It is not affiliated with Apple.
+The interface is an original web design informed by Apple Human Interface Guidelines: system typography, clear hierarchy, restrained color, direct controls, and support for system appearance and accessibility settings. It is not affiliated with Apple.
 
 ## License
 

@@ -1,6 +1,8 @@
 import { readFile } from "node:fs/promises";
 
 const ARCHIVE_PATH = new URL("../data/archive-data.json", import.meta.url);
+const MAP_ARCHIVE_PATH = new URL("../data/map-archive-data.json", import.meta.url);
+const WORLD_MAP_PATH = new URL("../data/world-map.json", import.meta.url);
 const requiredLocations = [
   "World",
   "India",
@@ -14,12 +16,16 @@ const requiredLocations = [
 ];
 
 const archive = JSON.parse(await readFile(ARCHIVE_PATH, "utf8"));
+const mapArchive = JSON.parse(await readFile(MAP_ARCHIVE_PATH, "utf8"));
+const worldMap = JSON.parse(await readFile(WORLD_MAP_PATH, "utf8"));
 const fail = (message) => {
   console.error(`Archive validation failed: ${message}`);
   process.exitCode = 1;
 };
 
 if (archive.meta?.archiveEnd !== "2024-12-31") fail("archive end must be 2024-12-31");
+if (!Array.isArray(mapArchive.frames) || mapArchive.frames.length !== 60) fail("map archive must contain 60 monthly frames");
+if (!Array.isArray(worldMap.countries) || worldMap.countries.length < 170) fail("world map must contain country geometry");
 
 for (const location of requiredLocations) {
   const rows = archive.locations?.[location];
@@ -38,4 +44,4 @@ for (const location of requiredLocations) {
 }
 
 if (process.exitCode) process.exit(process.exitCode);
-console.log(`Archive verified: ${requiredLocations.length} locations × 60 monthly observations.`);
+console.log(`Archive verified: ${requiredLocations.length} locations × 60 monthly observations and ${worldMap.countries.length} country shapes.`);
