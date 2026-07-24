@@ -59,7 +59,7 @@ async function loadArchive() {
     if (!response.ok) throw new Error(`Archive data request failed (${response.status})`);
     state.data = await response.json();
     renderAll();
-    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").then((registration) => registration.update()).catch(() => {});
   } catch (error) {
     elements.chartStatus.textContent = "The archive data did not load. Refresh the page and try again.";
     elements.summary.setAttribute("aria-busy", "false");
