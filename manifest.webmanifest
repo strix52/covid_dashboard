@@ -1,0 +1,11 @@
+{
+  "name": "COVID-19 Dashboard — Archive",
+  "short_name": "COVID Archive",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#f4f7fb",
+  "icons": [
+    { "src": "assets/archive-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
