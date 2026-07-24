@@ -1,5 +1,5 @@
-const CACHE_NAME = "covid-archive-v7";
-const CORE_ASSETS = ["./", "index.html", "styles.css?v=archive-20260724e", "app.js?v=archive-20260724e", "data/archive-data.json", "data/map-archive-data.json", "data/world-map.json", "manifest.webmanifest", "assets/archive-mark.svg"];
+const CACHE_NAME = "covid-archive-v8";
+const CORE_ASSETS = ["./", "index.html", "styles.css?v=archive-20260724f", "app.js?v=archive-20260724f", "data/archive-data.json", "data/map-archive-data.json", "data/world-map.json", "manifest.webmanifest", "assets/archive-mark.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)));
@@ -13,5 +13,9 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  if (event.request.mode === "navigate") {
+    event.respondWith(fetch(event.request).catch(() => caches.match(event.request).then((cached) => cached || caches.match("./"))));
+    return;
+  }
   event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
 });
